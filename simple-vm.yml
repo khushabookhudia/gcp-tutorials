@@ -1,0 +1,30 @@
+# CHANGE YOUR PROJECT ID'S BEFORE DEPLOYING
+
+resources:
+- type: compute.v1.instance
+  name: instance-1
+  properties:
+    zone: us-east1-c
+    machineType: https://www.googleapis.com/compute/v1/projects/(YOUR_PROJECT)/zones/us-east1-c/machineTypes/f1-micro # Replace (YOUR_PROJECT-ID) with your project ID
+    disks:
+    - deviceName: base-1
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+    tags:
+      items: ["http-server"]
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/(YOUR_PROJECT_ID)/global/networks/default # Replace (YOUR_PROJECT-ID) with your project ID 
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+- type: compute.v1.firewall
+  name: custom-allow-http 
+  properties:
+    targetTags: ["http-server"]
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+      - IPProtocol: TCP
+        ports: ["80"] 
