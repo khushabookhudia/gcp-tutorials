@@ -2,7 +2,7 @@ steps:
 
 # Simple sanity check: invoke the new gcloud container to confirm that it was
 # built correctly.
-- name: 'gcr.io/$PROJECT_ID/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
   args: ['compute' , 'scp' , '.' , 'instance-3:']
 
 timeout: 1200s
