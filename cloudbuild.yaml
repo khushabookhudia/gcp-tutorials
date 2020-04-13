@@ -3,6 +3,6 @@ steps:
 # Simple sanity check: invoke the new gcloud container to confirm that it was
 # built correctly.
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['compute' , 'scp' , 'khushabookhudia/gcp-tutorials/*' , 'khushaboo_khudia@instance-3:/home/khushaboo_khudia' , '--zone=us-central1-a' , '--recurse']
+  args: ['compute' , 'scp' , 'khushabookhudia/gcp-tutorials/*/' , 'khushaboo_khudia@instance-3:/home/khushaboo_khudia' , '--zone=us-central1-a' , '--recurse']
 
 timeout: 1200s
