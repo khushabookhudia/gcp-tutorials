@@ -1,0 +1,33 @@
+Resources:
+  MyInstance: 
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-2a
+      ImageId: ami-02ccb28830b645a41
+      InstanceType: t2.micro
+      Tags:
+       -
+         Key: "Env"
+         Value: "Dev"
+       -
+         Key: "created-by"
+         Value: "cloud-formation"
+  SSHSecurityGroup: 
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: 22
+        ToPort: 22 
+        IpProtocol: tcp
+  ServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable incoming traffic from port 80
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+
